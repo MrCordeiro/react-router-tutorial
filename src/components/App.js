@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   BrowserRouter,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 
 // App components
@@ -10,15 +11,20 @@ import Home from './Home';
 import About from './About';
 import Teachers from './Teachers';
 import Courses from './Courses';
+import NotFound from './NotFound';
 
 const App = () => (
   <BrowserRouter>
     <div className="container">
-      <Route path="/" component={Header} />
-      <Route exact path="/" component={Home} />
-      <Route path="/about" render={ () => <About />} />
-      <Route path="/teachers" component={Teachers} />
-      <Route path="/courses" component={Courses} />
+      <Header />
+      {/* Switch only matches the first Route component that matches a url */}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" render={ () => <About />} />
+        <Route path="/teachers" component={Teachers} />
+        <Route path="/courses" component={Courses} />
+        <Route component={NotFound} />
+      </Switch>
     </div>
   </BrowserRouter>
 );
